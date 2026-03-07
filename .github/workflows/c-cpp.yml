@@ -30,7 +30,7 @@ jobs:
         cp build/me3_csv_ekstraktor_Linux "release/${PROGRAMNAME}-${VERSION}-Linux"
         make clean
         make TARGET_OS=windows
-        cp build/me3_csv_ekstraktor_Win32.exe "release/${PROGRAMNAME}-${VERSION}-Win32"
+        cp build/me3_csv_ekstraktor_Win32.exe "release/${PROGRAMNAME}-${VERSION}-Win32.exe"
      
     - name: Public
       uses: softprops/action-gh-release@v1
