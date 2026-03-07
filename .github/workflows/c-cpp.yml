@@ -1,0 +1,43 @@
+name: C/C++ CI
+
+on:
+  push:
+    tags:
+      - v1.**
+      
+permissions:
+  contents: write
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - run: |
+        sudo apt-get install zlib1g-dev
+        sudo apt-get install mingw-w64
+        sudo apt-get install g++-mingw-w64-i686-posix
+    - run: make
+    - run: mkdir -p release
+        PROGRAMNAME="me3_csv_ekstraktor"
+        VERSION="${GITHUB_REF_NAME#v}"
+        if [ -f "build/me3_csv_ekstraktor_Linux" ]; then
+          cp build/me3_csv_ekstraktor_Linux "release/${PROGRAMNAME}-${VERSION}-Linux"
+        else
+          echo "Linux binarija nema!"
+        fi
+        make clean
+        make TARGET_OS=windows
+        if [ -f "build/me3_csv_ekstraktor_Win32.exe" ]; then
+          cp build/me3_csv_ekstraktor_Win32.exe "release/${PROGRAMNAME}-${VERSION}-Win32"
+        else
+          echo "Windows binarija nema!"
+        fi
+     
+    - name: Public
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          release/*
