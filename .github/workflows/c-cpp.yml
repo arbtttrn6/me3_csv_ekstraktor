@@ -3,7 +3,7 @@ name: C/C++ CI
 on:
   push:
     tags:
-      - v1.**
+      - v*
       
 permissions:
   contents: write
