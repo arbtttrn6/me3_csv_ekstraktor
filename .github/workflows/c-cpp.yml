@@ -24,18 +24,10 @@ jobs:
         mkdir -p release
         PROGRAMNAME="me3_csv_ekstraktor"
         VERSION="${GITHUB_REF_NAME#v}"
-        if [ -f build/me3_csv_ekstraktor_Linux ]; then
-          cp build/me3_csv_ekstraktor_Linux "release/${PROGRAMNAME}-${VERSION}-Linux"
-        else
-          echo "Linux binarija nema!"
-        fi
+        cp build/me3_csv_ekstraktor_Linux "release/${PROGRAMNAME}-${VERSION}-Linux"
         make clean
         make TARGET_OS=windows
-        if [ -f build/me3_csv_ekstraktor_Win32.exe ]; then
-          cp build/me3_csv_ekstraktor_Win32.exe "release/${PROGRAMNAME}-${VERSION}-Win32"
-        else
-          echo "Windows binarija nema!"
-        fi
+        cp build/me3_csv_ekstraktor_Win32.exe "release/${PROGRAMNAME}-${VERSION}-Win32"
      
     - name: Public
       uses: softprops/action-gh-release@v1
