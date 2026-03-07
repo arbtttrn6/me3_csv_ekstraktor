@@ -20,7 +20,8 @@ jobs:
         sudo apt-get install mingw-w64
         sudo apt-get install g++-mingw-w64-i686-posix
     - run: make
-    - run: mkdir -p release
+    - run: |
+        mkdir -p release
         PROGRAMNAME="me3_csv_ekstraktor"
         VERSION="${GITHUB_REF_NAME#v}"
         if [ -f "build/me3_csv_ekstraktor_Linux" ]; then
